@@ -1,0 +1,41 @@
+###### fastapi 필수 ######
+fastapi==0.81.0
+pydantic==1.10.0
+SQLAlchemy==1.4.40
+bcrypt==4.0.0
+passlib==1.7.4
+starlette==0.19.1
+pymysql
+uvicorn==0.18.3
+python-jose==3.3.0
+python-multipart==0.0.5
+sqlparse
+pygments
+
+##### time zone #####
+pytz
+
+###### 암호화관련 ######
+pycryptodomex
+pkcs7
+
+###### AWS S3 ######
+aiobotocore==0.12.0
+
+###### curl ######
+requests
+
+##### auzre ######
+msal>=1.7,<2
+
+beautifulsoup4
+Pillow==9.5.0
+
+##### excel ######
+pandas>=0.16
+openpyxl
+xlsxwriter
+
+
+##### https://tom.catshoek.dev/posts/nextauth-fastapi/ #####
+fastapi_nextauth_jwt

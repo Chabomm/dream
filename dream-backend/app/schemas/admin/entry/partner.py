@@ -1,0 +1,123 @@
+from typing import List, Dict, Any, Union, Optional
+from datetime import date, datetime, time, timedelta
+
+from app.schemas.schema import *
+
+class DreamPartner(BaseModel):
+    mode: Optional[str] = Field("", title="REG/MOD/DEL")
+    uid: Optional[int] = Field(0, title="uid")
+    partner_type: Optional[str] = Field(None, title="100 : 개방형, 200 : 직접회원가입, 201 : 직접회원가입 승인제도, 300 : 관리자가 회원등록, 400 : 자동로그인", max_length=20)
+    partner_id: Optional[str] = Field(None, title="고객사 아이디", max_length=100)
+    mall_name: Optional[str] = Field(None, title="고객사 복지몰명", max_length=100)
+    company_name: Optional[str] = Field(None, title="고객사 회사명", max_length=100)
+    sponsor: Optional[str] = Field(None, title="스폰서", max_length=50)
+    partner_code: Optional[str] = Field(None, title="고객사 코드", max_length=50)
+    prefix: Optional[str] = Field(None, title="아이디 프리픽스", max_length=21)
+    logo: Optional[str] = Field(None, title="로고 이미지", max_length=255)
+    is_welfare: Optional[str] = Field(None, title="복지포인트 사용여부", max_length=1)
+    is_dream: Optional[str] = Field(None, title="드림포인트 사용여부", max_length=1)
+    state: Optional[str] = Field(None, title="100 : 대기, 200 : 운영중, 300 : 일시중지, 400 : 폐쇄", max_length=10)
+    mem_type: Optional[str] = Field(None, title="회원유형", max_length=50)
+    mall_type: Optional[str] = Field(None, title="복지몰 유형(임직원물, 멤버십몰, 협회몰)", max_length=20)
+    create_at: Optional[datetime] = Field(None, title="등록일")
+    delete_at: Optional[datetime] = Field(None, title="삭제일")
+    update_at: Optional[datetime] = Field(None, title="수정일")
+    class Config:
+        orm_mode = True
+
+class PartnerInput(BaseModel):
+    mode: Optional[str] = Field("", title="REG/MOD/DEL")
+    uid: Optional[int] = Field(0, title="uid")
+    roles: Optional[List[int]] = Field([], title="권한")
+    mall_name: Optional[str] = Field(None, title="고객사 복지몰명", max_length=100)
+    company_name: Optional[str] = Field(None, title="고객사 회사명", max_length=100)
+    state: Optional[str] = Field(None, title="100 : 대기, 200 : 운영중, 300 : 일시중지, 400 : 폐쇄", max_length=10)
+    sponsor: Optional[str] = Field(None, title="스폰서", max_length=50)
+    partner_type: Optional[str] = Field(None, title="100 : 개방형, 200 : 직접회원가입, 201 : 직접회원가입 승인제도, 300 : 관리자가 회원등록, 400 : 자동로그인", max_length=20)
+    mem_type: Optional[str] = Field(None, title="회원유형", max_length=50)
+    mall_type: Optional[str] = Field(None, title="몰타입", max_length=100)
+    is_welfare: Optional[str] = Field(None, title="복지포인트 사용여부", max_length=1)
+    is_dream: Optional[str] = Field(None, title="드림포인트 사용여부", max_length=1)
+    ceo_name: Optional[str] = Field(None, title="대표자 성함", max_length=30)
+    staff_name: Optional[str] = Field(None, title="담당자명", max_length=30)
+    staff_dept: Optional[str] = Field(None, title="담당자 부서", max_length=30)
+    staff_position: Optional[str] = Field(None, title="담당자 직급", max_length=30)
+    staff_position2: Optional[str] = Field(None, title="담당자 직책", max_length=30)
+    staff_mobile: Optional[str] = Field(None, title="담당자 연락처", max_length=30)
+    staff_email: Optional[str] = Field(None, title="담당자 이메일", max_length=255)
+    account_email: Optional[str] = Field(None, title="정산메일", max_length=255)
+    post: Optional[str] = Field(None, title="우편번호", max_length=10)
+    addr: Optional[str] = Field(None, title="주소", max_length=100)
+    addr_detail: Optional[str] = Field(None, title="주소상세", max_length=100)
+    company_hp: Optional[str] = Field(None, title="대표번호", max_length=20)
+    biz_kind: Optional[str] = Field(None, title="분류", max_length=20)
+    biz_item: Optional[str] = Field(None, title="업종", max_length=20)
+    biz_no: Optional[str] = Field(None, title="사업자등록번호", max_length=20)
+    file_biz_no: Optional[str] = Field(None, title="사업자등록증", max_length=255)
+    file_bank: Optional[str] = Field(None, title="통장사본", max_length=255)
+    file_logo: Optional[str] = Field(None, title="회사로고", max_length=255)
+    file_mall_logo: Optional[str] = Field(None, title="복지몰로고", max_length=255)
+    give_point: Optional[int] = Field(None, title="지급할 포인트 금액")
+    exp_date: Optional[int] = Field(None, title="포인트 유효일")
+    end_date: Optional[str] = Field(None, title="언제까지 지급할건지")
+    memo: Optional[str] = Field(None, title="관리자 특이사항 메모", max_length=300)
+    
+    class Config:
+        orm_mode = True
+        
+class DreamPartnerInfo(BaseModel):
+    partner_uid: Optional[int] = Field(0, title="dream.T_PARTNER의 고유번호")
+    counsel_uid: Optional[int] = Field(0, title="scm.T_DREAM_COUNSEL의 고유번호")
+    build_uid: Optional[int] = Field(0, title="scm.T_DREAM_BUILD의 고유번호")
+    company_name: Optional[str] = Field(None, title="기업명", max_length=100)
+    ceo_name: Optional[str] = Field(None, title="대표자 성함", max_length=30)
+    staff_name: Optional[str] = Field(None, title="담당자명", max_length=30)
+    staff_dept: Optional[str] = Field(None, title="담당자 부서", max_length=30)
+    staff_position: Optional[str] = Field(None, title="담당자 직급", max_length=30)
+    staff_position2: Optional[str] = Field(None, title="담당자 직책", max_length=30)
+    staff_mobile: Optional[str] = Field(None, title="담당자 연락처", max_length=30)
+    staff_email: Optional[str] = Field(None, title="담당자 이메일", max_length=255)
+    account_email: Optional[str] = Field(None, title="정산메일", max_length=255)
+    post: Optional[str] = Field(None, title="우편번호", max_length=10)
+    addr: Optional[str] = Field(None, title="주소", max_length=100)
+    addr_detail: Optional[str] = Field(None, title="주소상세", max_length=100)
+    company_hp: Optional[str] = Field(None, title="대표번호", max_length=20)
+    biz_kind: Optional[str] = Field(None, title="분류", max_length=20)
+    biz_item: Optional[str] = Field(None, title="업종", max_length=20)
+    biz_no: Optional[str] = Field(None, title="사업자등록번호", max_length=20)
+    biz_service: Optional[str] = Field(None, title="서비스 분류", max_length=20)
+    mall_name: Optional[str] = Field(None, title="복지몰명", max_length=50)
+    host: Optional[str] = Field(None, title="도메인 및 대표관리자아이디", max_length=50)
+    file_biz_no: Optional[str] = Field(None, title="사업자등록증", max_length=255)
+    file_bank: Optional[str] = Field(None, title="통장사본", max_length=255)
+    file_logo: Optional[str] = Field(None, title="회사로고", max_length=255)
+    file_mall_logo: Optional[str] = Field(None, title="복지몰로고", max_length=255)
+    create_at: Optional[datetime] = Field(None, title="등록일")
+    update_at: Optional[datetime] = Field(None, title="수정일")
+    delete_at: Optional[datetime] = Field(None, title="삭제일")
+    class Config:
+        orm_mode = True
+
+
+class DreamPartner(BaseModel):
+    mode: Optional[str] = Field("", title="REG/MOD/DEL")
+    uid: Optional[int] = Field(0, title="uid")
+    partner_type: Optional[str] = Field(None, title="100 : 개방형, 200 : 직접회원가입, 201 : 직접회원가입 승인제도, 300 : 관리자가 회원등록, 400 : 자동로그인", max_length=20)
+    partner_id: Optional[str] = Field(None, title="고객사 아이디", max_length=100)
+    mall_name: Optional[str] = Field(None, title="고객사 복지몰명", max_length=100)
+    company_name: Optional[str] = Field(None, title="고객사 회사명", max_length=100)
+    sponsor: Optional[str] = Field(None, title="스폰서", max_length=50)
+    partner_code: Optional[str] = Field(None, title="고객사 코드", max_length=50)
+    prefix: Optional[str] = Field(None, title="아이디 프리픽스", max_length=21)
+    logo: Optional[str] = Field(None, title="로고 이미지", max_length=255)
+    is_welfare: Optional[str] = Field(None, title="복지포인트 사용여부", max_length=1)
+    is_dream: Optional[str] = Field(None, title="드림포인트 사용여부", max_length=1)
+    state: Optional[str] = Field(None, title="100 : 대기, 200 : 운영중, 300 : 일시중지, 400 : 폐쇄", max_length=10)
+    mem_type: Optional[str] = Field(None, title="회원유형", max_length=50)
+    mall_type: Optional[str] = Field(None, title="복지몰 유형(임직원물, 멤버십몰, 협회몰)", max_length=20)
+    create_at: Optional[datetime] = Field(None, title="등록일")
+    delete_at: Optional[datetime] = Field(None, title="삭제일")
+    update_at: Optional[datetime] = Field(None, title="수정일")
+    class Config:
+        orm_mode = True
+

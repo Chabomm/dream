@@ -1,0 +1,20 @@
+version: '3'
+services:
+    manager:
+        image: manager
+        container_name: manager-green
+        env_file: ../.env.production
+        build:
+            context: ../
+        restart: always
+        environment:
+            - PORT=8012
+        ports:
+            - 8012:8012
+        volumes:
+            - ../../resource:/app/public/resource
+        networks:
+            - common
+networks:
+    common:
+        external: true

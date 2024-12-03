@@ -1,0 +1,35 @@
+from sqlalchemy import Column, String, Integer, ForeignKey, text, DateTime, Boolean, JSON, Text
+
+from app.core.dbSCM import Base
+
+class T_DREAM_BUILD(Base):
+    __tablename__ = "T_DREAM_BUILD"
+    uid = Column(Integer, primary_key=True, index=True)
+    company_name = Column(String) 
+    ceo_name = Column(String) 
+    staff_name = Column(String) 
+    staff_dept = Column(String) 
+    staff_position = Column(String) 
+    staff_position2 = Column(String) 
+    staff_mobile = Column(String) 
+    staff_email = Column(String)
+    account_email = Column(String) 
+    post = Column(String) 
+    addr = Column(String) 
+    addr_detail = Column(String) 
+    company_hp = Column(String) 
+    biz_kind = Column(String) 
+    biz_item = Column(String) 
+    biz_no = Column(String) 
+    biz_service = Column(String) 
+    mall_name = Column(String) 
+    host = Column(String) 
+    file_biz_no = Column(String) 
+    file_bank = Column(String) 
+    file_logo = Column(String) 
+    file_mall_logo = Column(String) 
+    state = Column(String, default='100') 
+    counsel_uid = Column(Integer)
+    create_at = Column(DateTime, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    update_at = Column(DateTime) 
+    delete_at = Column(DateTime)

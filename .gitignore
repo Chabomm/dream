@@ -1,0 +1,10 @@
+.vscode/
+data/
+.env
+proxy/
+.DS_Store
+resource/b2b
+resource/board
+docker-compose.yml
+*.pyc
+__pycache__/
